@@ -14,11 +14,22 @@ export default {
           sesame: '#D1C7B7',
           seaweed: '#1F2937',
           kimchi: '#B81D24'
+        },
+        bakery: {
+          cream: '#FDF4E3',      // warm cream background
+          vanilla: '#FAE9D2',    // light vanilla beige
+          caramel: '#D9A05B',    // caramel accent
+          cocoa: '#5A3E2B',      // deep cocoa brown
+          dough: '#B5835A',      // dough brown
+          cherry: '#B84C44',     // cherry red accent
+          sugar: '#FFF9F2'       // near-white sugar
         }
       },
       fontFamily: {
         'pretendard': ['Pretendard', 'system-ui', 'sans-serif'],
-        'noto-kr': ['Noto Serif KR', 'serif']
+        'noto-kr': ['Noto Serif KR', 'serif'],
+        'bakery-display': ['"Playfair Display"', 'serif'],
+        'bakery-sans': ['"Nunito"', 'ui-sans-serif', 'system-ui', 'sans-serif']
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
