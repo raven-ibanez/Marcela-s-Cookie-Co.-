@@ -14,7 +14,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
   const [step, setStep] = useState<'details' | 'payment'>('details');
   const [customerName, setCustomerName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
-  const [serviceType, setServiceType] = useState<ServiceType>('pickup');
+  const [serviceType, setServiceType] = useState<ServiceType>('delivery');
   const [address, setAddress] = useState('');
   const [landmark, setLandmark] = useState('');
   const [pickupTime, setPickupTime] = useState('5-10');
@@ -94,9 +94,7 @@ Please confirm this order to proceed. Thank you for choosing Marcela's! 🥟
     
   };
 
-  const isDetailsValid = customerName && contactNumber && 
-    (serviceType !== 'delivery' || address) && 
-    (serviceType !== 'pickup' || (pickupTime !== 'custom' || customTime));
+  const isDetailsValid = customerName && contactNumber && address;
 
   if (step === 'details') {
     return (
@@ -175,74 +173,20 @@ Please confirm this order to proceed. Thank you for choosing Marcela's! 🥟
                 />
               </div>
 
-              {/* Service Type */}
+              {/* Service Type - Delivery only */}
               <div>
                 <label className="block text-sm font-medium text-bakery-cocoa mb-3">Service Type *</label>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { value: 'pickup', label: 'Pickup', icon: '🚶' },
-                    { value: 'delivery', label: 'Delivery', icon: '🛵' }
-                  ].map((option) => (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() => setServiceType(option.value as ServiceType)}
-                      className={`p-4 rounded-lg border-2 transition-all duration-200 ${
-                        serviceType === option.value
-                          ? 'border-bakery-caramel bg-bakery-caramel text-white'
-                          : 'border-bakery-caramel/50 bg-white text-bakery-cocoa hover:border-bakery-caramel'
-                      }`}
-                    >
-                      <div className="text-2xl mb-1">{option.icon}</div>
-                      <div className="text-sm font-medium">{option.label}</div>
-                    </button>
-                  ))}
+                <div className="grid grid-cols-1">
+                  <div className="p-4 rounded-lg border-2 border-bakery-caramel bg-bakery-caramel text-white">
+                    <div className="text-2xl mb-1">🛵</div>
+                    <div className="text-sm font-medium">Delivery</div>
+                  </div>
                 </div>
               </div>
 
               {/* Dine-in removed */}
 
-              {/* Pickup Time Selection */}
-              {serviceType === 'pickup' && (
-                <div>
-                  <label className="block text-sm font-medium text-bakery-cocoa mb-3">Pickup Time *</label>
-                  <div className="space-y-3">
-                    <div className="grid grid-cols-2 gap-3">
-                      {[
-                        { value: '5-10', label: '5-10 minutes' },
-                        { value: '15-20', label: '15-20 minutes' },
-                        { value: '25-30', label: '25-30 minutes' },
-                        { value: 'custom', label: 'Custom Time' }
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          type="button"
-                          onClick={() => setPickupTime(option.value)}
-                          className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm ${
-                            pickupTime === option.value
-                              ? 'border-bakery-caramel bg-bakery-caramel text-white'
-                              : 'border-bakery-caramel/50 bg-white text-bakery-cocoa hover:border-bakery-caramel'
-                          }`}
-                        >
-                          <Clock className="h-4 w-4 mx-auto mb-1" />
-                          {option.label}
-                        </button>
-                      ))}
-                    </div>
-                    
-                    {pickupTime === 'custom' && (
-                      <input
-                        type="text"
-                        value={customTime}
-                        onChange={(e) => setCustomTime(e.target.value)}
-                        className="w-full px-4 py-3 border border-bakery-caramel/50 rounded-lg focus:ring-2 focus:ring-bakery-caramel focus:border-transparent transition-all duration-200"
-                        placeholder="e.g., 45 minutes, 1 hour, 2:30 PM"
-                        required
-                      />
-                    )}
-                  </div>
-                </div>
-              )}
+              {/* Pickup removed */}
 
               {/* Delivery Address */}
               {serviceType === 'delivery' && (
